@@ -1,0 +1,27 @@
+title: "Untitled"
+author: "Yang XU"
+date: "October 19, 2017"
+output: html_document
+---
+
+```{r}
+D1 <- read.csv("~/Desktop/formative1-results-DI.csv")
+library(ggplot2)
+library(scales)
+D2 <- D1[-c(1:2)]
+
+
+D3 <- ifelse(D2[c(1:14)] == "Yes", 1,0)
+D3 <- as.data.frame(D3)
+names(D3) <- c(1:14)
+D3$total <- rowSums(D3)
+D4 <- D3[15]
+
+
+ggplot(D4, aes(D4$total)) +
+    geom_bar(width = 1) +
+    xlab("Total Score")+ ylab("Count") + 
+    ggtitle("Total Score Distribution") +
+    scale_x_continuous(breaks = scales::pretty_breaks(n = 14)) +
+    scale_y_continuous(breaks = scales::pretty_breaks(n = 3))
+```
